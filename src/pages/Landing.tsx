@@ -1,30 +1,25 @@
 // src/pages/Landing.tsx
 
 import React, { useState, useEffect } from 'react';
-import { Database, Zap, Code, Globe, Users, Star, User } from 'lucide-react';
+import { Shield, Lock, User, CheckCircle, Star, Users, ArrowRight, Zap } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Container, Button, Card, CardContent, Badge, Header, Nav, Section, Span, H1, H2, P, Div, Footer } from '../lib/dev-container';
 import { useAuth } from '../components/auth/AuthProvider';
 import type { ComponentRegistryId } from '../registry/componentRegistry';
 
 // Helper functions to ensure type safety for dynamic IDs
-const getStatCardId = (index: number): ComponentRegistryId => {
-  const ids: ComponentRegistryId[] = ['stat-card-0', 'stat-card-1', 'stat-card-2', 'stat-card-3'];
-  return ids[index] || 'noID';
-};
-
 const getFeatureCardId = (index: number): ComponentRegistryId => {
-  const ids: ComponentRegistryId[] = ['feature-card-0', 'feature-card-1', 'feature-card-2', 'feature-card-3'];
+  const ids: ComponentRegistryId[] = ['auth-feature-card-0', 'auth-feature-card-1', 'auth-feature-card-2', 'auth-feature-card-3'];
   return ids[index] || 'noID';
 };
 
-const getTechLetterId = (index: number): ComponentRegistryId => {
-  const ids: ComponentRegistryId[] = ['tech-letter-0', 'tech-letter-1', 'tech-letter-2', 'tech-letter-3', 'tech-letter-4', 'tech-letter-5'];
+const getStatCardId = (index: number): ComponentRegistryId => {
+  const ids: ComponentRegistryId[] = ['auth-stat-card-0', 'auth-stat-card-1', 'auth-stat-card-2', 'auth-stat-card-3'];
   return ids[index] || 'noID';
 };
 
-const getTechBadgeId = (index: number): ComponentRegistryId => {
-  const ids: ComponentRegistryId[] = ['tech-badge-0', 'tech-badge-1', 'tech-badge-2', 'tech-badge-3', 'tech-badge-4', 'tech-badge-5'];
+const getTestimonialCardId = (index: number): ComponentRegistryId => {
+  const ids: ComponentRegistryId[] = ['testimonial-card-0', 'testimonial-card-1', 'testimonial-card-2'];
   return ids[index] || 'noID';
 };
 
@@ -36,385 +31,419 @@ export const Landing: React.FC = () => {
     setMounted(true);
   }, []);
 
-  const features = [
+  const authFeatures = [
+    {
+      icon: <Shield className="w-8 h-8 text-blue-500" />,
+      title: "Secure Authentication",
+      description: "Industry-standard security with encrypted sessions and secure password handling"
+    },
+    {
+      icon: <Lock className="w-8 h-8 text-green-500" />,
+      title: "Protected Routes",
+      description: "Role-based access control ensuring users only see what they're authorized to access"
+    },
+    {
+      icon: <User className="w-8 h-8 text-purple-500" />,
+      title: "User Management",
+      description: "Complete user profile management with preferences and activity tracking"
+    },
     {
       icon: <Zap className="w-8 h-8 text-yellow-500" />,
-      title: "Lightning Fast",
-      description: "Built with Vite for instant hot module replacement and blazing fast builds"
-    },
-    {
-      icon: <Database className="w-8 h-8 text-green-500" />,
-      title: "MongoDB + Prisma",
-      description: "Type-safe database access with MongoDB flexibility and Prisma's developer experience"
-    },
-    {
-      icon: <Code className="w-8 h-8 text-blue-500" />,
-      title: "TypeScript Ready",
-      description: "Full TypeScript support with strict type checking and IntelliSense"
-    },
-    {
-      icon: <Globe className="w-8 h-8 text-purple-500" />,
-      title: "Deploy Anywhere",
-      description: "Ready for Netlify, Vercel, or any modern hosting platform"
+      title: "Fast & Reliable",
+      description: "Lightning-fast authentication with persistent sessions and automatic token refresh"
     }
   ];
 
   const stats = [
-    { label: "Build Time", value: "< 2s" },
-    { label: "Bundle Size", value: "< 50KB" },
-    { label: "TypeScript", value: "100%" },
-    { label: "Performance", value: "A+" }
+    { label: "Active Users", value: "10K+" },
+    { label: "Uptime", value: "99.9%" },
+    { label: "Security Score", value: "A+" },
+    { label: "Response Time", value: "<100ms" }
+  ];
+
+  const testimonials = [
+    {
+      name: "Sarah Johnson",
+      role: "Product Manager",
+      content: "The authentication system is incredibly smooth and secure. Our users love the seamless experience.",
+      rating: 5
+    },
+    {
+      name: "Mike Chen",
+      role: "Developer",
+      content: "Easy to integrate and customize. The documentation is excellent and the API is intuitive.",
+      rating: 5
+    },
+    {
+      name: "Emily Davis",
+      role: "Security Analyst",
+      content: "Impressed by the security features and compliance standards. Exactly what we needed.",
+      rating: 5
+    }
   ];
 
   return (
-    <Container componentId="landing-page-root"> {/* Changed to direct ID */}
+    <Container componentId="auth-landing-page">
       <Div 
         devId="main-wrapper" 
         devName="Main Wrapper" 
         devDescription="Main page wrapper with gradient background"
-        className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900"
+        className="min-h-screen bg-gradient-to-br from-blue-900 via-indigo-900 to-purple-900"
       >
-      {/* Header */}
-      <Header 
-        devId="main-header" 
-        devName="Main Header" 
-        devDescription="Primary site header with navigation"
-        className="container mx-auto px-4 py-6"
-      >
-        <Nav 
-          devId="main-nav" 
-          devName="Main Navigation" 
-          devDescription="Primary navigation bar"
-          className="flex items-center justify-between"
+        {/* Header */}
+        <Header 
+          devId="main-header" 
+          devName="Main Header" 
+          devDescription="Primary site header with navigation"
+          className="container mx-auto px-4 py-6"
         >
-          <Div 
-            devId="logo-section" 
-            devName="Logo Section" 
-            devDescription="Company logo and brand name"
-            className="flex items-center space-x-2"
+          <Nav 
+            devId="main-nav" 
+            devName="Main Navigation" 
+            devDescription="Primary navigation bar"
+            className="flex items-center justify-between"
           >
-            <Div devId="noID" className="w-8 h-8 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg flex items-center justify-center">
-              <Code className="w-5 h-5 text-white" />
-            </Div>
-            <Span 
-              devId="brand-name" 
-              devName="Brand Name" 
-              devDescription="Geenius Template brand name"
-              className="text-xl font-bold text-white"
-            >
-              Geenius Template
-            </Span>
-          </Div>
-          <Div 
-            devId="nav-actions" 
-            devName="Navigation Actions" 
-            devDescription="Navigation buttons and user menu"
-            className="flex items-center space-x-4"
-          >
-            <Button 
-              devId="docs-button" 
-              devName="Docs Button" 
-              devDescription="Link to documentation"
-              variant="ghost" 
-              className="text-gray-300 hover:text-white transition-colors"
-            >
-              Docs
-            </Button>
-            {isAuthenticated ? (
-              <Div 
-                devId="user-section" 
-                devName="User Section" 
-                devDescription="Authenticated user welcome area"
-                className="flex items-center space-x-4"
-              >
-                <Span 
-                  devId="welcome-message" 
-                  devName="Welcome Message" 
-                  devDescription="Welcome message for authenticated user"
-                  className="text-gray-300"
-                >
-                  Welcome, {user?.name?.split(' ')[0]}!
-                </Span>
-                <Link to="/dashboard">
-                  <Button 
-                    devId="nav-dashboard-button"
-                    devName="Navigation Dashboard Button"
-                    devDescription="Dashboard button in navigation header for authenticated users"
-                    className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg transition-colors"
-                  >
-                    <User className="w-4 h-4 mr-2" />
-                    Dashboard
-                  </Button>
-                </Link>
-              </Div>
-            ) : (
-              <Div 
-                devId="auth-buttons" 
-                devName="Authentication Buttons" 
-                devDescription="Login and register buttons for unauthenticated users"
-                className="flex items-center space-x-2"
-              >
-                <Link to="/login">
-                  <Button 
-                    devId="nav-login-button"
-                    devName="Navigation Login Button"
-                    devDescription="Login button in navigation header"
-                    variant="ghost" 
-                    className="text-gray-300 hover:text-white transition-colors"
-                  >
-                    Login
-                  </Button>
-                </Link>
-                <Link to="/register">
-                  <Button 
-                    devId="nav-register-button"
-                    devName="Navigation Register Button"
-                    devDescription="Get started button in navigation header"
-                    className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg transition-colors"
-                  >
-                    Get Started
-                  </Button>
-                </Link>
-              </Div>
-            )}
-          </Div>
-        </Nav>
-      </Header>
-
-      {/* Hero Section */}
-      <Container componentId="hero-section"> {/* Changed to direct ID */}
-        <Section 
-          devId="hero-content" 
-          devName="Hero Content" 
-          devDescription="Main hero Section with title and call-to-action"
-          className="container mx-auto px-4 py-20 text-center"
-        >
-          <Div 
-            devId="hero-content-wrapper" 
-            devName="Hero Content Wrapper" 
-            devDescription="Animated wrapper for hero content"
-            className={`transition-all duration-1000 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
-          >
-            <H1 
-              devId="hero-title" 
-              devName="Hero Title" 
-              devDescription="Main hero title showcasing the tech stack"
-              className="text-5xl md:text-7xl font-bold text-white mb-6"
-            >
-              Vite + React + 
-              <Span 
-                devId="mongodb-highlight" 
-                devName="MongoDB Highlight" 
-                devDescription="Highlighted MongoDB text in gradient"
-                className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent"
-              >
-                {' '}MongoDB
-              </Span>
-            </H1>
-            <P 
-              devId="hero-description" 
-              devName="Hero Description" 
-              devDescription="Hero Section description explaining the template benefits"
-              className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto"
-            >
-              Modern full-stack template with lightning-fast development, type-safe database access, 
-              and production-ready deployment configuration.
-            </P>
             <Div 
-              devId="hero-cta-buttons" 
-              devName="Hero CTA Buttons" 
-              devDescription="Call-to-action buttons in hero Section"
-              className="flex flex-col sm:flex-row gap-4 justify-center"
+              devId="logo-section" 
+              devName="Logo Section" 
+              devDescription="Company logo and brand name"
+              className="flex items-center space-x-2"
             >
-              {isAuthenticated ? (
-                <Link to="/dashboard">
-                  <Button 
-                    devId="hero-start-building"
-                    devName="Start Building Button"
-                    devDescription="Primary call-to-action button for starting to build with the template"
-                    className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-8 py-3 rounded-lg font-semibold transition-all transform hover:scale-105"
-                  >
-                    Go to Dashboard
-                  </Button>
-                </Link>
-              ) : (
-                <Link to="/register">
-                  <Button 
-                    devId="hero-start-building"
-                    devName="Start Building Button"
-                    devDescription="Primary call-to-action button for starting to build with the template"
-                    className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-8 py-3 rounded-lg font-semibold transition-all transform hover:scale-105"
-                  >
-                    Start Building
-                  </Button>
-                </Link>
-              )}
-              <Button 
-                devId="hero-github-button"
-                devName="View on GitHub Button"
-                devDescription="Secondary button to view the project on GitHub"
-                variant="outline"
-                className="border border-purple-500 text-purple-400 hover:bg-purple-500 hover:text-white px-8 py-3 rounded-lg font-semibold transition-all"
-              >
-                View on GitHub
-              </Button>
-            </Div>
-          </Div>
-        </Section>
-      </Container>
-
-      {/* Stats Section */}
-      <Container componentId="stats-section"> {/* Changed to direct ID */}
-        <Section 
-          devId="stats-content" 
-          devName="Stats Content" 
-          devDescription="Statistics Section showing performance metrics"
-          className="container mx-auto px-4 py-12"
-        >
-          <Div 
-            devId="stats-grid" 
-            devName="Stats Grid" 
-            devDescription="Grid container for statistics cards"
-            className="grid grid-cols-2 md:grid-cols-4 gap-6"
-          >
-            {stats.map((stat, index) => (
-              <Card 
-                key={index} 
-                devId={getStatCardId(index)}
-                devName={`${stat.label} Stat Card`}
-                devDescription={`Statistical card showing ${stat.label}: ${stat.value}`}
-                className="bg-white/5 backdrop-blur-sm rounded-xl p-6 text-center border border-white/10"
-              >
-                <CardContent devId="noID"  className="p-0">
-                  <Div devId="noID" className="text-2xl font-bold text-white mb-2">{stat.value}</Div>
-                  <Div devId="noID" className="text-gray-400">{stat.label}</Div>
-                </CardContent>
-              </Card>
-            ))}
-          </Div>
-        </Section>
-      </Container>
-
-      {/* Features Section */}
-      <Container componentId="features-section"> {/* Changed to direct ID */}
-        <Section devId="noID" className="container mx-auto px-4 py-20">
-          <Div devId="noID" className="text-center mb-16">
-            <H2 devId="noID" className="text-4xl font-bold text-white mb-4">Why Choose This Template?</H2>
-            <P devId="noID" className="text-gray-300 max-w-2xl mx-auto">
-              Everything you need to build modern web applications with the latest technologies
-            </P>
-          </Div>
-          <Div devId="noID" className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {features.map((feature, index) => (
-              <Card 
-                key={index} 
-                devId={getFeatureCardId(index)}
-                devName={`${feature.title} Feature Card`}
-                devDescription={`Feature card highlighting ${feature.title}: ${feature.description}`}
-                className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10 hover:border-purple-500/50 transition-all"
-              >
-                <CardContent devId="noID" className="p-0">
-                  <Div devId="noID" className="mb-4">{feature.icon}</Div>
-                  <h3 className="text-xl font-semibold text-white mb-2">{feature.title}</h3>
-                  <P devId="noID" className="text-gray-400">{feature.description}</P>
-                </CardContent>
-              </Card>
-            ))}
-          </Div>
-        </Section>
-      </Container>
-
-      {/* Tech Stack Section */}
-      <Container componentId="tech-stack-section"> {/* Changed to direct ID */}
-        <Section devId="noID" className="container mx-auto px-4 py-20">
-          <Div devId="noID" className="text-center mb-16">
-            <H2 devId="noID" className="text-4xl font-bold text-white mb-4">Modern Tech Stack</H2>
-            <P devId="noID" className="text-gray-300 max-w-2xl mx-auto">
-              Built with the most popular and reliable technologies
-            </P>
-          </Div>
-          <Div devId="noID" className="grid grid-cols-2 md:grid-cols-6 gap-8">
-            {[
-              { name: "Vite", color: "from-yellow-400 to-orange-500" },
-              { name: "React", color: "from-blue-400 to-cyan-400" },
-              { name: "TypeScript", color: "from-blue-500 to-blue-600" },
-              { name: "MongoDB", color: "from-green-400 to-green-500" },
-              { name: "Prisma", color: "from-purple-400 to-purple-500" },
-              { name: "Tailwind", color: "from-teal-400 to-teal-500" }
-            ].map((tech, index) => (
-              <Div key={index} devId="noID" className="text-center">
-                <Div devId={getTechLetterId(index)} className={`w-16 h-16 mx-auto mb-3 rounded-xl bg-gradient-to-br ${tech.color} flex items-center justify-center`}>
-                  <span className="text-white font-bold text-lg">{tech.name[0]}</span>
-                </Div>
-                <Badge 
-                  devId={getTechBadgeId(index)}
-                  devName={`${tech.name} Technology Badge`}
-                  devDescription={`Technology badge for ${tech.name}`}
-                  className="text-gray-300 font-medium bg-transparent border-none"
-                >
-                  {tech.name}
-                </Badge>
+              <Div devId="noID" className="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg flex items-center justify-center">
+                <Shield className="w-5 h-5 text-white" />
               </Div>
-            ))}
-          </Div>
-        </Section>
-      </Container>
+              <Span 
+                devId="brand-name" 
+                devName="Brand Name" 
+                devDescription="Auth Test Project brand name"
+                className="text-xl font-bold text-white"
+              >
+                AuthTest Pro
+              </Span>
+            </Div>
+            <Div 
+              devId="nav-actions" 
+              devName="Navigation Actions" 
+              devDescription="Navigation buttons and user menu"
+              className="flex items-center space-x-4"
+            >
+              <Button 
+                devId="docs-button" 
+                devName="Docs Button" 
+                devDescription="Link to documentation"
+                variant="ghost" 
+                className="text-gray-300 hover:text-white transition-colors"
+              >
+                Documentation
+              </Button>
+              {isAuthenticated ? (
+                <Div 
+                  devId="user-section" 
+                  devName="User Section" 
+                  devDescription="Authenticated user welcome area"
+                  className="flex items-center space-x-4"
+                >
+                  <Span 
+                    devId="welcome-message" 
+                    devName="Welcome Message" 
+                    devDescription="Welcome message for authenticated user"
+                    className="text-gray-300"
+                  >
+                    Welcome back, {user?.name?.split(' ')[0]}!
+                  </Span>
+                  <Link to="/dashboard">
+                    <Button 
+                      devId="nav-dashboard-button"
+                      devName="Navigation Dashboard Button"
+                      devDescription="Dashboard button in navigation header for authenticated users"
+                      className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors"
+                    >
+                      <User className="w-4 h-4 mr-2" />
+                      Dashboard
+                    </Button>
+                  </Link>
+                </Div>
+              ) : (
+                <Div 
+                  devId="auth-buttons" 
+                  devName="Authentication Buttons" 
+                  devDescription="Login and register buttons for unauthenticated users"
+                  className="flex items-center space-x-2"
+                >
+                  <Link to="/login">
+                    <Button 
+                      devId="nav-login-button"
+                      devName="Navigation Login Button"
+                      devDescription="Login button in navigation header"
+                      variant="ghost" 
+                      className="text-gray-300 hover:text-white transition-colors"
+                    >
+                      Sign In
+                    </Button>
+                  </Link>
+                  <Link to="/register">
+                    <Button 
+                      devId="nav-register-button"
+                      devName="Navigation Register Button"
+                      devDescription="Get started button in navigation header"
+                      className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors"
+                    >
+                      Get Started
+                    </Button>
+                  </Link>
+                </Div>
+              )}
+            </Div>
+          </Nav>
+        </Header>
 
-      {/* CTA Section */}
-      <Container componentId="cta-section"> {/* Changed to direct ID */}
-        <Section devId="noID" className="container mx-auto px-4 py-20">
-          <Div devId="noID" className="bg-gradient-to-r from-purple-600/20 to-pink-600/20 rounded-2xl p-12 text-center border border-purple-500/30">
-            <H2 devId="noID" className="text-4xl font-bold text-white mb-4">Ready to Build Something Amazing?</H2>
-            <P devId="noID" className="text-gray-300 mb-8 max-w-2xl mx-auto">
-              Get started with this template and build your next project with confidence
-            </P>
-            <Div devId="noID" className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button 
-                devId="cta-start-project"
-                devName="Start Project Button"
-                devDescription="Primary CTA button to start a new project"
-                className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-8 py-3 rounded-lg font-semibold transition-all transform hover:scale-105"
+        {/* Hero Section */}
+        <Container componentId="hero-section">
+          <Section 
+            devId="hero-content" 
+            devName="Hero Content" 
+            devDescription="Main hero section with title and call-to-action"
+            className="container mx-auto px-4 py-20 text-center"
+          >
+            <Div 
+              devId="hero-content-wrapper" 
+              devName="Hero Content Wrapper" 
+              devDescription="Animated wrapper for hero content"
+              className={`transition-all duration-1000 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+            >
+              <H1 
+                devId="hero-title" 
+                devName="Hero Title" 
+                devDescription="Main hero title showcasing authentication system"
+                className="text-5xl md:text-7xl font-bold text-white mb-6"
               >
-                <span className="flex items-center gap-2">
-                  <Star className="w-5 h-5" />
-                  Start Project
-                </span>
-              </Button>
-              <Button 
-                devId="cta-join-community"
-                devName="Join Community Button"
-                devDescription="Secondary CTA button to join the community"
-                variant="outline"
-                className="border border-purple-500 text-purple-400 hover:bg-purple-500 hover:text-white px-8 py-3 rounded-lg font-semibold transition-all"
+                Secure
+                <Span 
+                  devId="auth-highlight" 
+                  devName="Authentication Highlight" 
+                  devDescription="Highlighted authentication text in gradient"
+                  className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent"
+                >
+                  {' '}Authentication
+                </Span>
+                <br />Made Simple
+              </H1>
+              <P 
+                devId="hero-description" 
+                devName="Hero Description" 
+                devDescription="Hero section description explaining the authentication benefits"
+                className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto"
               >
-                <span className="flex items-center gap-2">
-                  <Users className="w-5 h-5" />
-                  Join Community
-                </span>
-              </Button>
+                Experience seamless user authentication with enterprise-grade security, 
+                intuitive user management, and lightning-fast performance.
+              </P>
+              <Div 
+                devId="hero-cta-buttons" 
+                devName="Hero CTA Buttons" 
+                devDescription="Call-to-action buttons in hero section"
+                className="flex flex-col sm:flex-row gap-4 justify-center"
+              >
+                {isAuthenticated ? (
+                  <Link to="/dashboard">
+                    <Button 
+                      devId="hero-dashboard-button"
+                      devName="Hero Dashboard Button"
+                      devDescription="Primary call-to-action button to access dashboard"
+                      className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-3 rounded-lg font-semibold transition-all transform hover:scale-105"
+                    >
+                      <ArrowRight className="w-5 h-5 mr-2" />
+                      Go to Dashboard
+                    </Button>
+                  </Link>
+                ) : (
+                  <>
+                    <Link to="/register">
+                      <Button 
+                        devId="hero-start-button"
+                        devName="Start Free Button"
+                        devDescription="Primary call-to-action button to start using the system"
+                        className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-3 rounded-lg font-semibold transition-all transform hover:scale-105"
+                      >
+                        <ArrowRight className="w-5 h-5 mr-2" />
+                        Start Free Trial
+                      </Button>
+                    </Link>
+                    <Link to="/login">
+                      <Button 
+                        devId="hero-signin-button"
+                        devName="Sign In Button"
+                        devDescription="Secondary button to sign in for existing users"
+                        variant="outline"
+                        className="border border-blue-500 text-blue-400 hover:bg-blue-500 hover:text-white px-8 py-3 rounded-lg font-semibold transition-all"
+                      >
+                        Sign In
+                      </Button>
+                    </Link>
+                  </>
+                )}
+              </Div>
+            </Div>
+          </Section>
+        </Container>
+
+        {/* Stats Section */}
+        <Container componentId="stats-section">
+          <Section 
+            devId="stats-content" 
+            devName="Stats Content" 
+            devDescription="Statistics section showing system metrics"
+            className="container mx-auto px-4 py-12"
+          >
+            <Div 
+              devId="stats-grid" 
+              devName="Stats Grid" 
+              devDescription="Grid container for statistics cards"
+              className="grid grid-cols-2 md:grid-cols-4 gap-6"
+            >
+              {stats.map((stat, index) => (
+                <Card 
+                  key={index} 
+                  devId={getStatCardId(index)}
+                  devName={`${stat.label} Stat Card`}
+                  devDescription={`Statistical card showing ${stat.label}: ${stat.value}`}
+                  className="bg-white/5 backdrop-blur-sm rounded-xl p-6 text-center border border-white/10"
+                >
+                  <CardContent devId="noID" className="p-0">
+                    <Div devId="noID" className="text-2xl font-bold text-white mb-2">{stat.value}</Div>
+                    <Div devId="noID" className="text-gray-400">{stat.label}</Div>
+                  </CardContent>
+                </Card>
+              ))}
+            </Div>
+          </Section>
+        </Container>
+
+        {/* Features Section */}
+        <Container componentId="features-section">
+          <Section devId="noID" className="container mx-auto px-4 py-20">
+            <Div devId="noID" className="text-center mb-16">
+              <H2 devId="noID" className="text-4xl font-bold text-white mb-4">Powerful Authentication Features</H2>
+              <P devId="noID" className="text-gray-300 max-w-2xl mx-auto">
+                Everything you need for secure, scalable user authentication and management
+              </P>
+            </Div>
+            <Div devId="noID" className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {authFeatures.map((feature, index) => (
+                <Card 
+                  key={index} 
+                  devId={getFeatureCardId(index)}
+                  devName={`${feature.title} Feature Card`}
+                  devDescription={`Feature card highlighting ${feature.title}: ${feature.description}`}
+                  className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10 hover:border-blue-500/50 transition-all"
+                >
+                  <CardContent devId="noID" className="p-0">
+                    <Div devId="noID" className="mb-4">{feature.icon}</Div>
+                    <h3 className="text-xl font-semibold text-white mb-2">{feature.title}</h3>
+                    <P devId="noID" className="text-gray-400">{feature.description}</P>
+                  </CardContent>
+                </Card>
+              ))}
+            </Div>
+          </Section>
+        </Container>
+
+        {/* Testimonials Section */}
+        <Container componentId="testimonials-section">
+          <Section devId="noID" className="container mx-auto px-4 py-20">
+            <Div devId="noID" className="text-center mb-16">
+              <H2 devId="noID" className="text-4xl font-bold text-white mb-4">What Our Users Say</H2>
+              <P devId="noID" className="text-gray-300 max-w-2xl mx-auto">
+                Trusted by developers and businesses worldwide
+              </P>
+            </Div>
+            <Div devId="noID" className="grid md:grid-cols-3 gap-6">
+              {testimonials.map((testimonial, index) => (
+                <Card 
+                  key={index} 
+                  devId={getTestimonialCardId(index)}
+                  devName={`${testimonial.name} Testimonial Card`}
+                  devDescription={`Testimonial card from ${testimonial.name}: ${testimonial.content}`}
+                  className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10"
+                >
+                  <CardContent devId="noID" className="p-0">
+                    <Div devId="noID" className="flex mb-4">
+                      {[...Array(testimonial.rating)].map((_, i) => (
+                        <Star key={i} className="w-5 h-5 text-yellow-400 fill-current" />
+                      ))}
+                    </Div>
+                    <P devId="noID" className="text-gray-300 mb-4">"{testimonial.content}"</P>
+                    <Div devId="noID">
+                      <Div devId="noID" className="font-semibold text-white">{testimonial.name}</Div>
+                      <Div devId="noID" className="text-sm text-gray-400">{testimonial.role}</Div>
+                    </Div>
+                  </CardContent>
+                </Card>
+              ))}
+            </Div>
+          </Section>
+        </Container>
+
+        {/* CTA Section */}
+        <Container componentId="cta-section">
+          <Section devId="noID" className="container mx-auto px-4 py-20">
+            <Div devId="noID" className="bg-gradient-to-r from-blue-600/20 to-purple-600/20 rounded-2xl p-12 text-center border border-blue-500/30">
+              <H2 devId="noID" className="text-4xl font-bold text-white mb-4">Ready to Get Started?</H2>
+              <P devId="noID" className="text-gray-300 mb-8 max-w-2xl mx-auto">
+                Join thousands of users who trust our authentication system for their applications
+              </P>
+              <Div devId="noID" className="flex flex-col sm:flex-row gap-4 justify-center">
+                {!isAuthenticated && (
+                  <>
+                    <Link to="/register">
+                      <Button 
+                        devId="cta-signup-button"
+                        devName="CTA Sign Up Button"
+                        devDescription="Primary CTA button to sign up for the service"
+                        className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-3 rounded-lg font-semibold transition-all transform hover:scale-105"
+                      >
+                        <span className="flex items-center gap-2">
+                          <CheckCircle className="w-5 h-5" />
+                          Sign Up Free
+                        </span>
+                      </Button>
+                    </Link>
+                    <Button 
+                      devId="cta-learn-more"
+                      devName="Learn More Button"
+                      devDescription="Secondary CTA button to learn more about the service"
+                      variant="outline"
+                      className="border border-blue-500 text-blue-400 hover:bg-blue-500 hover:text-white px-8 py-3 rounded-lg font-semibold transition-all"
+                    >
+                      <span className="flex items-center gap-2">
+                        <Users className="w-5 h-5" />
+                        Learn More
+                      </span>
+                    </Button>
+                  </>
+                )}
+              </Div>
+            </Div>
+          </Section>
+        </Container>
+
+        {/* Footer */}
+        <Footer 
+          devId="main-footer" 
+          devName="Main Footer" 
+          devDescription="Site footer with links and copyright"
+          className="container mx-auto px-4 py-8 border-t border-white/10"
+        >
+          <Div devId="noID" className="flex flex-col md:flex-row justify-between items-center">
+            <Div devId="noID" className="text-gray-400 mb-4 md:mb-0">
+              © 2024 AuthTest Pro. Secure authentication made simple.
+            </Div>
+            <Div devId="noID" className="flex space-x-6">
+              <a href="#" className="text-gray-400 hover:text-white transition-colors">Privacy Policy</a>
+              <a href="#" className="text-gray-400 hover:text-white transition-colors">Terms of Service</a>
+              <a href="#" className="text-gray-400 hover:text-white transition-colors">Support</a>
             </Div>
           </Div>
-        </Section>
-      </Container>
-
-      {/* Footer */}
-      <Footer 
-        devId="main-footer" 
-        devName="Main Footer" 
-        devDescription="Site footer with links and copyright"
-        className="container mx-auto px-4 py-8 border-t border-white/10"
-      >
-        <Div devId="noID" className="flex flex-col md:flex-row justify-between items-center">
-          <Div devId="noID" className="text-gray-400 mb-4 md:mb-0">
-            © 2024 Geenius Template. Built with ❤️ for developers.
-          </Div>
-          <Div devId="noID" className="flex space-x-6">
-            <a href="#" className="text-gray-400 hover:text-white transition-colors">Documentation</a>
-            <a href="#" className="text-gray-400 hover:text-white transition-colors">GitHub</a>
-            <a href="#" className="text-gray-400 hover:text-white transition-colors">Support</a>
-          </Div>
-        </Div>
-      </Footer>
+        </Footer>
       </Div>
     </Container>
   );
